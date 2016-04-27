@@ -215,7 +215,7 @@ document.addEventListener('keydown', function(event){
     } else {
       setUsername();
     }
-    event.preventDefault();
+    event.defaultPrevented;
   }
 
 

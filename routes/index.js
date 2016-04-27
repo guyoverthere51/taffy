@@ -20,7 +20,7 @@ router.get('/register', function(req, res){
 router.post('/register', function(req, res) {
     Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
         if (err) {
-          return res.render("register", {info: "Sorry. That username already exists. Try again."});
+          return res.render("register", {info: "Username already exists, please try again."});
         }
 
         passport.authenticate('local')(req, res, function () {
@@ -33,8 +33,25 @@ router.get('/login', function(req, res){
 	res.render('login', {user: req.user});
 });
 
-router.post('/login', passport.authenticate('local'), function(req, res) {
-    res.redirect('/');
+// router.post('/login', passport.authenticate('local'), function(req, res) {
+//     res.redirect('/');
+// });
+
+router.post('/login', function(req, res, next){
+    passport.authenticate('local', function(err, user, info){
+        if(err){
+            return next(err);
+        }
+        if (! user){
+            return res.render('login', {info: "Log in failed, please try again."});
+        }
+        req.login(user, function(err){
+            if(err){
+                return next(err);
+            }
+            res.redirect('/');
+        });
+    })(req, res, next);
 });
 
 
