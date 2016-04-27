@@ -16,12 +16,22 @@ var loginPage = document.querySelector('.login.page');
 var chatPage = document.querySelector('.chat.page');
 var usernameTitle = document.getElementById('userNamer');
 
+var loggedUser = document.getElementById('loggedUser');
+var enterChatButton = document.getElementById('enterChatButton');
+
+
 
 var username;
 var connected = false;
 var typing = false;
 
 var socket = io();
+
+
+window.onload = function(){
+  socket.emit('pageload');
+  // console.log('page load');
+}
 
 function addParticipantsMessage (data) {
   var message = '';
@@ -33,19 +43,27 @@ function addParticipantsMessage (data) {
   log(message);
 }
 
-
-
-function setUsername(){
+function helloUser(data){
+  username = data.username;
+  loggedUser.innerText = data.username;
   
-  username = usernameInput.value.trim();
-  if (username) {
-    loginPage.style.display='none';
-    chatPage.style.display='block';
-    inputMessage.focus();
-    socket.emit('add user', username);
-  }
+  // console.log(data.username);
 
-}
+};
+
+// function setUsername(){
+  
+//   username = usernameInput.value.trim();
+//   if (username) {
+//     loginPage.style.display='none';
+//     chatPage.style.display='block';
+//     inputMessage.focus();
+//     socket.emit('add user', username);
+//   }
+
+// }
+
+
 
 
 
@@ -209,11 +227,21 @@ document.addEventListener('input', function(){
   updateTyping();
 });
 
+enterChatButton.addEventListener('click', function(){
+  if (username) {
+    loginPage.style.display='none';
+    chatPage.style.display='block';
+    inputMessage.focus();
+    socket.emit('add user', username);
+  }
 
-window.onload = function(){
-  console.log('hello there');
-  socket.emit('pageload');
-}
+});
+
+
+
+
+// console.log('bananar ', datausername);
+
 
 
 
@@ -221,10 +249,11 @@ window.onload = function(){
 
 // Whenever the server emits 'login', log the login message
 
-socket.on('pageload', function(data){
-  
+socket.on('socketUserExpose', function(data){
 
-})
+  helloUser(data); 
+
+});
 
 socket.on('login', function (data) {
   connected = true;

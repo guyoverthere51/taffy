@@ -101,6 +101,7 @@ io.on('connection', function (socket) {
   socket.on('pageload', function(data){
     socket.username = socket.request.user.username;
     socket.emit('socketUserExpose', {username: socket.request.user.username});
+    console.log('hello tar');
     
   });
   
