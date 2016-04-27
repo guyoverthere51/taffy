@@ -73,7 +73,7 @@ io.use(passportSocketIo.authorize({
 }));
 
 function onAuthorizeSuccess(data, accept){
-  console.log('successful connection: ', data);
+  console.log('successful connection');
   accept();
 }
 
@@ -97,7 +97,10 @@ io.on('connection', function (socket) {
   var addedUser = false;
   var loggedInUser = socket.request.user.username;
   console.log('user goes here: ', socket.request.user.username);
+
   socket.on('pageload', function(data){
+    socket.username = socket.request.user.username;
+    socket.emit('socketUserExpose', {username: socket.request.user.username});
     
   });
   

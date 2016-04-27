@@ -2,7 +2,7 @@
   <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
       <!-- Title -->
-      <span class="mdl-layout-title" id="user">Taffy</span>
+      <span class="mdl-layout-title">Taffy</span>
       <!-- Add spacer, to align navigation to the right -->
       <div class="mdl-layout-spacer"></div>
       <!-- Navigation. We hide it in small screens. -->
@@ -44,8 +44,10 @@
         </li>
         <li class="login page">
           <div class="form">
-            <h3 class="title">What's your nickname?</h3>
-            <input class="usernameInput" type="text" maxlength="14" autofocus />
+            <!-- <h3 class="title">What's your nickname?</h3> -->
+            <h3 class="title">Hello, <span id = "loggedUser"></span></h3>
+            <!-- <input class="usernameInput" type="text" maxlength="14" autofocus /> -->
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary" type="submit" id="enterChatButton">Enter Chatroom</button>
           </div>
         </li>
       </ul>
@@ -55,50 +57,3 @@
 </div>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/javascripts/main.js"></script>
-
-
-<!--<script type="text/javascript">
-
-    console.log("Done:", user.username);
-// console.log(user.username);
-  var req = new XMLHttpRequest();
-  req.open("GET", "http://localhost:3000/home", true);
-  req.addEventListener("onload", function(data){
-    console.log("Done:", user.username);
-  });
-  req.send(null);
-
-
-
-</script>-->
-<!-- <script src="/socket.io/socket.io.js"></script>
-<script type="text/javascript">
-  var socket = io.connect("https://localhost:3000");
-  socket.on("connect", function(){
-    console.log('connected!');s
-  })
-
-  // document.addEventListener('DOMContentLoaded',function(data){
-  //   console.log('hello world');
-  //   console.log('user: ', data);
-  // });
-  // document.addEventListener('OnLoad', function(){
-  //   console.log('hello world');
-  // });
-</script> -->
-
-
-<!-- <ul class="pages">
-  <li class="chat page">
-    <div class="chatArea">
-      <ul class="messages"></ul>
-    </div>
-    <input class="inputMessage" placeholder="Type here..." autofocus />
-  </li>
-  <li class="login page">
-    <div class="form">
-      <h3 class="title">What's your nickname?</h3>
-      <input class="usernameInput" type="text" maxlength="14" autofocus />
-    </div>
-  </li>
-</ul> -->
