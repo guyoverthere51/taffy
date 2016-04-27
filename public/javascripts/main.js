@@ -30,7 +30,7 @@ var socket = io();
 
 window.onload = function(){
   socket.emit('pageload');
-  // console.log('page load');
+  console.log('page load:');
 }
 
 function addParticipantsMessage (data) {
@@ -45,7 +45,7 @@ function addParticipantsMessage (data) {
 
 function helloUser(data){
   username = data.username;
-  loggedUser.innerText = data.username;
+  loggedUser.innerText = username;
   
   // console.log(data.username);
 

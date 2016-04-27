@@ -95,14 +95,10 @@ var numUsers = 0;
 
 io.on('connection', function (socket) {
   var addedUser = false;
-  var loggedInUser = socket.request.user.username;
-  console.log('user goes here: ', socket.request.user.username);
-
+  
   socket.on('pageload', function(data){
-    socket.username = socket.request.user.username;
+    // socket.username = socket.request.user.username;
     socket.emit('socketUserExpose', {username: socket.request.user.username});
-    console.log('hello tar');
-    
   });
   
   // when the client emits 'new message', this listens and executes

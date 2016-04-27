@@ -9,7 +9,6 @@ router.get('/', function (req, res){
 
 
 router.get('/home', function(req,res){
-    console.log(req.session.passport.user);
     res.render('home');
 
 });
