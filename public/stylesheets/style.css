@@ -137,8 +137,21 @@ ul {
 
 /* Input */
 
-.inputMessage {
-  border: 10px solid #000;
+.inputMessage{
+  bottom: 0;
+  height: 60px;
+  left: 0;
+  border: none;
+  outline: none;
+  padding-left: 10px;
+  position: absolute;
+  right: 0;
+  width: 100%;
+}
+
+/*.inputMessageDiv {
+  /*display: block;*/
+  /*border: 10px solid #000;
   bottom: 0;
   height: 60px;
   left: 0;
@@ -147,7 +160,7 @@ ul {
   position: absolute;
   right: 0;
   width: 100%;
-}
+}*/
 
 
 .demo-card-square.mdl-card {
