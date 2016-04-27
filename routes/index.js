@@ -4,7 +4,7 @@ var Account = require('../models/account');
 var router = express.Router();
 
 router.get('/', function (req, res){
-    res.render('index', { title: 'supnikka', user : req.user });
+    res.render('index', { title: 'Taffy', user : req.user });
 });
 
 
