@@ -149,34 +149,22 @@ ul {
   width: 100%;
 }
 
-/*.inputMessageDiv {
-  /*display: block;*/
-  /*border: 10px solid #000;
-  bottom: 0;
-  height: 60px;
-  left: 0;
-  outline: none;
-  padding-left: 10px;
-  position: absolute;
-  right: 0;
+.launchDiv{
   width: 100%;
-}*/
-
-
-.demo-card-square.mdl-card {
-  width: 320px;
-  height: 640px;
-}
-.demo-card-square > .mdl-card__title {
-  color: #fff;
-  background:
-    url('../images/doge.jpg') bottom left 15% no-repeat #46B6AC;
+  height: 90px;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 
-/*custom*/
-/*.col-centered{
-    float: none;
-    display: block;
-    margin: 100 auto;
-    background-color: red;
-}*/
+.mdl-form-layout {
+  align-items: center;
+  justify-content: center;
+}
+.mdl-form-layout__content {
+  padding: 24px;
+  flex: none;
+}

@@ -1,5 +1,3 @@
-
-
 var FADE_TIME = 150;
 var TYPING_TIMER_LENGTH = 400;
 var COLORS = [
@@ -11,15 +9,11 @@ var COLORS = [
 var usernameInput = document.querySelector('.usernameInput');
 var messages = document.querySelector('.messages');
 var inputMessage = document.querySelector('.inputMessage');
-
 var loginPage = document.querySelector('.login.page');
 var chatPage = document.querySelector('.chat.page');
 var usernameTitle = document.getElementById('userNamer');
-
 var loggedUser = document.getElementById('loggedUser');
 var enterChatButton = document.getElementById('enterChatButton');
-
-
 
 var username;
 var connected = false;
@@ -27,10 +21,8 @@ var typing = false;
 
 var socket = io();
 
-
 window.onload = function(){
   socket.emit('pageload');
-  console.log('page load:');
 }
 
 function addParticipantsMessage (data) {
@@ -45,29 +37,14 @@ function addParticipantsMessage (data) {
 
 function helloUser(data){
   username = data.username;
-  loggedUser.innerText = username;
-  
-  // console.log(data.username);
+  loggedUser.innerText = username.capFirstLetter();
 
-};
+}
 
-// function setUsername(){
-  
-//   username = usernameInput.value.trim();
-//   if (username) {
-//     loginPage.style.display='none';
-//     chatPage.style.display='block';
-//     inputMessage.focus();
-//     socket.emit('add user', username);
-//   }
+String.prototype.capFirstLetter = function(){
+  return this.charAt(0).toUpperCase() + this.slice(1);
+}
 
-// }
-
-
-
-
-
-  // Sends a chat message
 function sendMessage () {
   var message = inputMessage.value;
 
@@ -114,10 +91,8 @@ function addChatMessage (data, options) {
   messageDiv.setAttribute('data-username', data.username);
   messageDiv.className += ' ' +typingClass;
   
-
   messageDiv.appendChild(usernameDiv);
   messageDiv.appendChild(messageBodyDiv);
-
 
   addMessageElement(messageDiv, options);
 }
@@ -154,12 +129,8 @@ function addMessageElement (el, options) {
   } else {
     messages.appendChild(el);
   }
-
     messages.lastChild.scrollIntoView();
-
 }
-
-
 
 function updateTyping () {
   if (connected) {
@@ -180,17 +151,13 @@ function updateTyping () {
   }
 }
 
-
 function getTypingMessages (data) {
 
   var typingMessages = document.querySelectorAll('.message.typing');
   return Array.prototype.filter.call(typingMessages, function(){
     return data['username']===data.username;
-  })
-
-
+  });
 }
-
 
 function getUsernameColor (username) {
 
@@ -202,8 +169,6 @@ function getUsernameColor (username) {
   var index = Math.abs(hash % COLORS.length);
   return COLORS[index];
 }
-
-
 
 document.addEventListener('keydown', function(event){
   if(event.keyCode ==13){
@@ -217,9 +182,6 @@ document.addEventListener('keydown', function(event){
     }
     event.defaultPrevented;
   }
-
-
-
   
 });
 
@@ -238,16 +200,7 @@ enterChatButton.addEventListener('click', function(){
 });
 
 
-
-
-// console.log('bananar ', datausername);
-
-
-
-
 // Socket events
-
-// Whenever the server emits 'login', log the login message
 
 socket.on('socketUserExpose', function(data){
 
@@ -257,40 +210,32 @@ socket.on('socketUserExpose', function(data){
 
 socket.on('login', function (data) {
   connected = true;
-  // Display the welcome message
-  var message = "Welcome to Chocolate";
+  var message = "Welcome to Taffy";
   log(message, {
     prepend: true
   });
   addParticipantsMessage(data);
 });
 
-// Whenever the server emits 'new message', update the chat body
 socket.on('new message', function (data) {
   addChatMessage(data);
 });
 
-// Whenever the server emits 'user joined', log it in the chat body
 socket.on('user joined', function (data) {
   log(data.username + ' joined');
   addParticipantsMessage(data);
 });
 
-// Whenever the server emits 'user left', log it in the chat body
 socket.on('user left', function (data) {
   log(data.username + ' left');
   addParticipantsMessage(data);
   removeChatTyping(data);
 });
 
-// Whenever the server emits 'typing', show the typing message
 socket.on('typing', function (data) {
-  // console.log('socket typing');
-
   addChatTyping(data);
 });
 
-// Whenever the server emits 'stop typing', kill the typing message
 socket.on('stop typing', function (data) {
   removeChatTyping(data);
 });
