@@ -17,14 +17,19 @@ router.get('/register', function(req, res){
 	res.render('register', { });
 });
 
-router.post('/register', function(req, res) {
+router.post('/register', function(req, res, next) {
     Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
         if (err) {
-          return res.render("register", {info: "Username already exists, please try again."});
+          return res.render("register", {error: err.message});
         }
 
         passport.authenticate('local')(req, res, function () {
-            res.redirect('/');
+            req.session.save(function (err) {
+                if (err) {
+                    return next(err);
+                }
+                res.redirect('/');
+            });
         });
     });
 });
@@ -43,7 +48,7 @@ router.post('/login', function(req, res, next){
             return next(err);
         }
         if (! user){
-            return res.render('login', {info: "Log in failed, please try again."});
+            return res.render('login', {error: "Log in failed, please try again."});
         }
         req.login(user, function(err){
             if(err){
