@@ -11,7 +11,7 @@ var messages = document.querySelector('.messages');
 var inputMessage = document.querySelector('.inputMessage');
 var loginPage = document.querySelector('.login.page');
 var chatPage = document.querySelector('.chat.page');
-var usernameTitle = document.getElementById('userNamer');
+// var usernameTitle = document.getElementById('userNamer');
 var loggedUser = document.getElementById('loggedUser');
 var enterChatButton = document.getElementById('enterChatButton');
 
@@ -47,13 +47,19 @@ String.prototype.capFirstLetter = function(){
 
 function sendMessage () {
   var message = inputMessage.value;
-
+  console.log(message);
   if (message && connected) {
     inputMessage.value = ('');
     addChatMessage({
       username: username,
       message: message
     });
+    if(message=='rick'){
+      addChatMessage({
+        username: 'RickAstley87',
+        message: 'will never give you up.'
+      });
+    }
 
     socket.emit('new message', message);
   }

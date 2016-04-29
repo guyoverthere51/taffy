@@ -14,7 +14,7 @@ var io = require('socket.io')(http);
 
 var expressSession = require('express-session');
 var MongoStore =require('connect-mongo')(expressSession);
-var sessionStore = new MongoStore({url: 'mongodb://localhost/chocolateUsers'});
+var sessionStore = new MongoStore({url: 'mongodb://localhost/taffy'});
 var passportSocketIo = require('passport.socketio');
 
 var mongoose = require('mongoose');
@@ -58,7 +58,7 @@ passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
-mongoose.connect('mongodb://localhost/chocolateUsers');
+mongoose.connect('mongodb://localhost/taffy');
 
 io.use(passportSocketIo.authorize({
   cookieParser: cookieParser,
